@@ -1,0 +1,26 @@
+.inner{
+    max-width:1200px;
+    margin:0 auto;
+}
+
+.title{
+    font-size:32px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.row{
+    padding-bottom:15px;
+}
+
+.label{
+    display:inline-block;
+    width:100%;
+    padding-bottom:5px;
+}
+
+.input{
+    width:100%;
+    border:1px solid #dadada;
+    line-height:35px;
+}
