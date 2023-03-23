@@ -5,7 +5,7 @@ import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { useRouter } from "next/router";
 
 
-const BoardWrite = ({isEdit}) => {
+const BoardWrite = ({isEdit, data}) => {
 
     const router = useRouter();
     
@@ -30,24 +30,27 @@ const BoardWrite = ({isEdit}) => {
         console.log(result);
         alert(result.data.createBoard.message);
         const boardNum = result.data.createBoard.number;
-        router.push(`/08-05-boards/${boardNum}`);
+        router.push(`/09-01-boards/${boardNum}`);
     };
 
 
     const onClickUpdate = async () => {
+        const updateVariables = {
+            number: Number(router.query.boardNum),
+        };
+        
+        if (writer) updateVariables.writer = writer;
+        if (title) updateVariables.title = title;
+        if (contents) updateVariables.contents = contents;
+
         const result = await updateBoard({
-            variables: {
-                number: Number(router.query.boardNum),
-                writer,
-                title,
-                contents,
-            }
+            variables: updateVariables,
         });
 
         console.log(result);
         alert(result.data.updateBoard.message);
         const boardNum = result.data.updateBoard.number;
-        router.push(`/08-05-boards/${boardNum}`);
+        router.push(`/09-01-boards/${boardNum}`);
     };
 
 
@@ -84,7 +87,8 @@ const BoardWrite = ({isEdit}) => {
                 onChangeTitle={onChangeTitle}
                 onChangeContents={onChangeContents}
                 myColor={myColor} 
-                isEdit={isEdit} />;
+                isEdit={isEdit}
+                data={data} />;
 
 };
 
